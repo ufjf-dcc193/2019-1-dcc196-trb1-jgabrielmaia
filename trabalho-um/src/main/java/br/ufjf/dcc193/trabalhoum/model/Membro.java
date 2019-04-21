@@ -1,9 +1,14 @@
 package br.ufjf.dcc193.trabalhoum.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+@Entity
 public class Membro {
-    private Integer Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long Id;
     private Integer IdSede;
     private String Nome;
     private String Funcao;
@@ -11,7 +16,7 @@ public class Membro {
     private Date DataEntrada;
     private Date DataSaida;
 
-    public Membro(Integer Id, Integer IdSede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
+    public Membro(Long Id, Integer IdSede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
         this.Id = Id;
         this.IdSede = IdSede;
         this.Nome = Nome;
@@ -22,11 +27,11 @@ public class Membro {
     }
 
 
-    public Integer getId() {
+    public Long getId() {
         return this.Id;
     }
 
-    public void setId(Integer Id) {
+    public void setId(Long Id) {
         this.Id = Id;
     }
 

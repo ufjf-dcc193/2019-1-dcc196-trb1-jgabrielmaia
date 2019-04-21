@@ -1,9 +1,14 @@
 package br.ufjf.dcc193.trabalhoum.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+@Entity
 public class Atividade {
-    private Integer Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long Id;
     private Integer IdSede;
     private String Titulo;
     private String Descricao;
@@ -14,7 +19,7 @@ public class Atividade {
     private Integer HorasFinanceiras;
     private Integer HorasAdministrativas;    
 
-    public Atividade(Integer Id, Integer IdSede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
+    public Atividade(Long Id, Integer IdSede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
         this.Id = Id;
         this.IdSede = IdSede;
         this.Titulo = Titulo;
@@ -28,11 +33,11 @@ public class Atividade {
     }
 
 
-    public Integer getId() {
+    public Long getId() {
         return this.Id;
     }
 
-    public void setId(Integer Id) {
+    public void setId(Long Id) {
         this.Id = Id;
     }
 

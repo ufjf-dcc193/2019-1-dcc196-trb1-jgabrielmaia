@@ -1,16 +1,20 @@
 package br.ufjf.dcc193.trabalhoum.model;
 
-import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+@Entity
 public class Sede {
-    private Integer Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long Id;
     private String Nome;
     private String Cidade;
     private String Bairro;
     private String Telefone;
     private String Url;    
 
-    public Sede(Integer Id, String Nome, String Cidade, String Bairro, String Telefone, String Url) {
+    public Sede(Long Id, String Nome, String Cidade, String Bairro, String Telefone, String Url) {
         this.Id = Id;
         this.Nome = Nome;
         this.Cidade = Cidade;
@@ -18,23 +22,12 @@ public class Sede {
         this.Telefone = Telefone;
         this.Url = Url;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Sede)) {
-            return false;
-        }
-        Sede sede = (Sede) o;
-        return Objects.equals(Id, sede.Id) && Objects.equals(Nome, sede.Nome) && Objects.equals(Cidade, sede.Cidade) && Objects.equals(Bairro, sede.Bairro) && Objects.equals(Telefone, sede.Telefone) && Objects.equals(Url, sede.Url);
-    }
     
-    public Integer getId() {
+    public Long getId() {
         return this.Id;
     }
 
-    public void setId(Integer Id) {
+    public void setId(Long Id) {
         this.Id = Id;
     }
 
