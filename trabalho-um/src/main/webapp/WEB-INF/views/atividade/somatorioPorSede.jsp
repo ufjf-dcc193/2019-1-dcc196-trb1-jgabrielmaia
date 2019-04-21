@@ -6,6 +6,6 @@
         <title>ONG</title>
     </head>
     <body>
-        <h1>Excluir Sede</h1>
+        <h1>Somatorio de Atividades da Sede</h1>
     </body>
 </html>

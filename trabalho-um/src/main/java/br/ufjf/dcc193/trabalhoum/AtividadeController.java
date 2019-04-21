@@ -24,4 +24,9 @@ public class AtividadeController {
     public String listar(){
         return "atividade/listar";
     }
+
+    @RequestMapping("/atividade/somatorioPorSede")
+    public String somatorioPorSede(){
+        return "atividade/somatorioPorSede";
+    }    
 }
