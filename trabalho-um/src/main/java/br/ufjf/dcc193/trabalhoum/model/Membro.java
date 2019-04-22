@@ -1,23 +1,42 @@
 package br.ufjf.dcc193.trabalhoum.model;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Membro {
+    
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
-    private Integer IdSede;
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name = "SedeMembroId", referencedColumnName="Id", insertable = false, updatable = false)
+    private Sede IdSede;
     private String Nome;
     private String Funcao;
+    @Email
     private String Email;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date DataEntrada;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date DataSaida;
 
-    public Membro(Long Id, Integer IdSede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
-        this.Id = Id;
+    public Membro(){
+
+    }
+
+    public Membro(Sede IdSede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
         this.IdSede = IdSede;
         this.Nome = Nome;
         this.Funcao = Funcao;
@@ -35,11 +54,11 @@ public class Membro {
         this.Id = Id;
     }
 
-    public Integer getIdSede() {
+    public Sede getIdSede() {
         return this.IdSede;
     }
 
-    public void setIdSede(Integer IdSede) {
+    public void setIdSede(Sede IdSede) {
         this.IdSede = IdSede;
     }
 
@@ -83,4 +102,16 @@ public class Membro {
         this.DataSaida = DataSaida;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " Id='" + getId() + "'" +
+            ", IdSede='" + getIdSede() + "'" +
+            ", Nome='" + getNome() + "'" +
+            ", Funcao='" + getFuncao() + "'" +
+            ", Email='" + getEmail() + "'" +
+            ", DataEntrada='" + getDataEntrada() + "'" +
+            ", DataSaida='" + getDataSaida() + "'" +
+            "}";
+    }
 }

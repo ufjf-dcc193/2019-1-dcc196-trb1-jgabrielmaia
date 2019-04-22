@@ -1,11 +1,19 @@
 package br.ufjf.dcc193.trabalhoum.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import java.util.Set;
 
 @Entity
 public class Sede {
+    
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
     private String Nome;
@@ -13,16 +21,24 @@ public class Sede {
     private String Bairro;
     private String Telefone;
     private String Url;    
+    @OneToMany(mappedBy = "IdSede", cascade = CascadeType.PERSIST, targetEntity = Membro.class, fetch = FetchType.EAGER)
+    private Set<Membro> Membros;
+    @OneToMany(mappedBy = "IdSede", cascade = CascadeType.PERSIST, targetEntity = Atividade.class, fetch = FetchType.EAGER)
+    private Set<Atividade> Atividades;
 
-    public Sede(Long Id, String Nome, String Cidade, String Bairro, String Telefone, String Url) {
-        this.Id = Id;
+    public Sede(){
+
+    }
+
+    public Sede(String Nome, String Cidade, String Bairro, String Telefone, String Url) {
         this.Nome = Nome;
         this.Cidade = Cidade;
         this.Bairro = Bairro;
         this.Telefone = Telefone;
         this.Url = Url;
     }
-    
+
+
     public Long getId() {
         return this.Id;
     }
@@ -70,4 +86,35 @@ public class Sede {
     public void setUrl(String Url) {
         this.Url = Url;
     }
+
+    public Set<Membro> getMembros() {
+        return this.Membros;
+    }
+
+    public void setMembros(Set<Membro> Membros) {
+        this.Membros = Membros;
+    }
+
+    public Set<Atividade> getAtividades() {
+        return this.Atividades;
+    }
+
+    public void setAtividades(Set<Atividade> Atividades) {
+        this.Atividades = Atividades;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " Id='" + getId() + "'" +
+            ", Nome='" + getNome() + "'" +
+            ", Cidade='" + getCidade() + "'" +
+            ", Bairro='" + getBairro() + "'" +
+            ", Telefone='" + getTelefone() + "'" +
+            ", Url='" + getUrl() + "'" +
+            ", Membros='" + getMembros() + "'" +
+            ", Atividades='" + getAtividades() + "'" +
+            "}";
+    }
+
 }
