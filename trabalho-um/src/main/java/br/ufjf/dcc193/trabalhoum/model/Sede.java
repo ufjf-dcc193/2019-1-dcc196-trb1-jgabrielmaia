@@ -1,41 +1,56 @@
 package br.ufjf.dcc193.trabalhoum.model;
 
-import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "sede")
 public class Sede {
-    private Integer Id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long Id;
     private String Nome;
     private String Cidade;
     private String Bairro;
     private String Telefone;
-    private String Url;    
+    private String Url;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Atividade> Atividades;    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Membro> Membros;
 
-    public Sede(Integer Id, String Nome, String Cidade, String Bairro, String Telefone, String Url) {
-        this.Id = Id;
+    public Sede(){
+
+    }
+
+    public Sede(String Nome, String Cidade, String Bairro, String Telefone, String Url) {
         this.Nome = Nome;
         this.Cidade = Cidade;
         this.Bairro = Bairro;
         this.Telefone = Telefone;
         this.Url = Url;
+        this.Atividades = new HashSet<>();
+        this.Membros = new HashSet<>();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Sede)) {
-            return false;
-        }
-        Sede sede = (Sede) o;
-        return Objects.equals(Id, sede.Id) && Objects.equals(Nome, sede.Nome) && Objects.equals(Cidade, sede.Cidade) && Objects.equals(Bairro, sede.Bairro) && Objects.equals(Telefone, sede.Telefone) && Objects.equals(Url, sede.Url);
+    public Sede(Long Id, String Nome, String Cidade, String Bairro, String Telefone, String Url) {
+        this(Nome, Cidade, Bairro, Telefone, Url);
+        this.Id = Id;        
     }
-    
-    public Integer getId() {
+
+    public Long getId() {
         return this.Id;
-    }
-
-    public void setId(Integer Id) {
-        this.Id = Id;
     }
 
     public String getNome() {
@@ -77,4 +92,45 @@ public class Sede {
     public void setUrl(String Url) {
         this.Url = Url;
     }
+
+    public Set<Membro> getMembros() {
+        return this.Membros;
+    }
+
+    public void setMembros(Set<Membro> Membros) {
+        this.Membros = Membros;
+    }
+
+    public void addMembro(Membro membro){
+        if(!Membros.contains(membro))
+            Membros.add(membro);
+    }
+
+    public Collection<Atividade> getAtividades() {
+        return this.Atividades;
+    }
+
+    public void setAtividades(Set<Atividade> Atividades) {
+        this.Atividades = Atividades;
+    }
+
+    public void addAtividade(Atividade atividade){
+        if(!Atividades.contains(atividade))
+            Atividades.add(atividade);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " Id='" + getId() + "'" +
+            ", Nome='" + getNome() + "'" +
+            ", Cidade='" + getCidade() + "'" +
+            ", Bairro='" + getBairro() + "'" +
+            ", Telefone='" + getTelefone() + "'" +
+            ", Url='" + getUrl() + "'" +
+            ", Membros='" + getMembros() + "'" +
+            ", Atividades='" + getAtividades() + "'" +
+            "}";
+    }
+
 }

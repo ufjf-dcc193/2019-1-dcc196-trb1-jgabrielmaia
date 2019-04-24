@@ -2,18 +2,38 @@ package br.ufjf.dcc193.trabalhoum.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
 public class Membro {
-    private Integer Id;
-    private Integer IdSede;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long Id;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false) 
+    private Sede Sede;
     private String Nome;
     private String Funcao;
+    @Email
     private String Email;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date DataEntrada;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date DataSaida;
 
-    public Membro(Integer Id, Integer IdSede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
-        this.Id = Id;
-        this.IdSede = IdSede;
+    public Membro(){
+
+    }
+
+    public Membro(String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
         this.Nome = Nome;
         this.Funcao = Funcao;
         this.Email = Email;
@@ -21,21 +41,25 @@ public class Membro {
         this.DataSaida = DataSaida;
     }
 
+    public Membro(Sede Sede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
+        this(Nome, Funcao, Email, DataEntrada, DataSaida);
+        this.Sede = Sede;
+    }
 
-    public Integer getId() {
+    public Long getId() {
         return this.Id;
     }
 
-    public void setId(Integer Id) {
+    public void setId(Long Id) {
         this.Id = Id;
     }
 
-    public Integer getIdSede() {
-        return this.IdSede;
+    public Sede getIdSede() {
+        return this.Sede;
     }
 
-    public void setIdSede(Integer IdSede) {
-        this.IdSede = IdSede;
+    public void setIdSede(Sede Sede) {
+        this.Sede = Sede;
     }
 
     public String getNome() {
@@ -78,4 +102,16 @@ public class Membro {
         this.DataSaida = DataSaida;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " Id='" + getId() + "'" +
+            ", IdSede='" + getIdSede() + "'" +
+            ", Nome='" + getNome() + "'" +
+            ", Funcao='" + getFuncao() + "'" +
+            ", Email='" + getEmail() + "'" +
+            ", DataEntrada='" + getDataEntrada() + "'" +
+            ", DataSaida='" + getDataSaida() + "'" +
+            "}";
+    }
 }

@@ -2,21 +2,44 @@ package br.ufjf.dcc193.trabalhoum.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
 public class Atividade {
-    private Integer Id;
-    private Integer IdSede;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long Id;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    private Sede Sede;
     private String Titulo;
     private String Descricao;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date DataInicio;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date DataFim;
     private Integer HorasAssistenciais;
     private Integer HorasJuridicas;
     private Integer HorasFinanceiras;
     private Integer HorasAdministrativas;    
 
-    public Atividade(Integer Id, Integer IdSede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
-        this.Id = Id;
-        this.IdSede = IdSede;
+    public Atividade(){
+
+    }
+
+    public Atividade(Sede Sede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
+        this(Titulo, Descricao, DataInicio, DataFim, HorasAssistenciais, HorasJuridicas, HorasFinanceiras, HorasAdministrativas);
+        this.Sede = Sede;
+    }
+
+    public Atividade(String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
         this.Titulo = Titulo;
         this.Descricao = Descricao;
         this.DataInicio = DataInicio;
@@ -28,20 +51,20 @@ public class Atividade {
     }
 
 
-    public Integer getId() {
+    public Long getId() {
         return this.Id;
     }
 
-    public void setId(Integer Id) {
+    public void setId(Long Id) {
         this.Id = Id;
     }
 
-    public Integer getIdSede() {
-        return this.IdSede;
+    public Sede getIdSede() {
+        return this.Sede;
     }
 
-    public void setIdSede(Integer IdSede) {
-        this.IdSede = IdSede;
+    public void setIdSede(Sede IdSede) {
+        this.Sede = IdSede;
     }
 
     public String getTitulo() {
@@ -106,6 +129,22 @@ public class Atividade {
 
     public void setHorasAdministrativas(Integer HorasAdministrativas) {
         this.HorasAdministrativas = HorasAdministrativas;
+    }  
+
+    @Override
+    public String toString() {
+        return "{" +
+            " Id='" + getId() + "'" +
+            ", IdSede='" + getIdSede() + "'" +
+            ", Titulo='" + getTitulo() + "'" +
+            ", Descricao='" + getDescricao() + "'" +
+            ", DataInicio='" + getDataInicio() + "'" +
+            ", DataFim='" + getDataFim() + "'" +
+            ", HorasAssistenciais='" + getHorasAssistenciais() + "'" +
+            ", HorasJuridicas='" + getHorasJuridicas() + "'" +
+            ", HorasFinanceiras='" + getHorasFinanceiras() + "'" +
+            ", HorasAdministrativas='" + getHorasAdministrativas() + "'" +
+            "}";
     }
 
 }
