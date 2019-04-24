@@ -76,9 +76,11 @@ public class SedeController {
         return new RedirectView("/sede/listar");
     }
 
-    @RequestMapping("/sede/excluir")
-    public String excluir(){
-        return "sede/excluir";
+    @RequestMapping("/sede/excluir/{id}")
+    public RedirectView excluir(@PathVariable String id) {
+        repo.deleteById(Long.parseLong(id));
+
+        return new RedirectView("/sede/listar");
     }
 
     @RequestMapping("/sede/listar")
