@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Wed Apr 24 01:43:54 BRT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016a-4da8-42ca-00000b20d960 
-on database directory C:\spring-apps\2019-1-dcc196-trb1-jgabrielmaia\trabalho-um\mydb with class loader sun.misc.Launcher$AppClassLoader@764c12b6 
+Wed Apr 24 02:40:43 BRT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016a-4ddc-479e-00000aa5c658 
+on database directory C:\spring-apps\2019-1-dcc196-trb1-jgabrielmaia\trabalho-um\mydb with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/Gabriel%20Maia/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_191-b12

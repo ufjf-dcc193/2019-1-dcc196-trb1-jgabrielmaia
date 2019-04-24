@@ -9,10 +9,10 @@
     <body>
         <h1>Listar Sedes</h1>
             <c:forEach items="${sedes}" var="sede">
-                <h2>${atividade.getNome()}</h2>    
+                <h2>${sede.getNome()}</h2>    
                 <ul>
-                    <li><strong>Cidade:</strong> ${sede.getCidade()}</li>
                     <li><strong>Estado Federacao:</strong> ${sede.getEstadoFederacao()}</li>
+                    <li><strong>Cidade:</strong> ${sede.getCidade()}</li>
                     <li><strong>Bairro:</strong> ${sede.getBairro()}</li>
                     <li><strong>Telefone:</strong> ${sede.getTelefone()}</li>
                     <li><a href="${sede.getUrl()}" target="_blank">Pagina da sede</a></li>
