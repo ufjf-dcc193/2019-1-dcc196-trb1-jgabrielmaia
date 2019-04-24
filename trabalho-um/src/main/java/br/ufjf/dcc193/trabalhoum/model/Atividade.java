@@ -59,12 +59,12 @@ public class Atividade {
         this.Id = Id;
     }
 
-    public Sede getIdSede() {
+    public Sede getSede() {
         return this.Sede;
     }
 
-    public void setIdSede(Sede IdSede) {
-        this.Sede = IdSede;
+    public void setSede(Sede Sede) {
+        this.Sede = Sede;
     }
 
     public String getTitulo() {
@@ -135,7 +135,7 @@ public class Atividade {
     public String toString() {
         return "{" +
             " Id='" + getId() + "'" +
-            ", IdSede='" + getIdSede() + "'" +
+            ", IdSede='" + getSede().getId() + "'" +
             ", Titulo='" + getTitulo() + "'" +
             ", Descricao='" + getDescricao() + "'" +
             ", DataInicio='" + getDataInicio() + "'" +

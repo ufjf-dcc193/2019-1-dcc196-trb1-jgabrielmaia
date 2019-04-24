@@ -54,11 +54,11 @@ public class Membro {
         this.Id = Id;
     }
 
-    public Sede getIdSede() {
+    public Sede getSede() {
         return this.Sede;
     }
 
-    public void setIdSede(Sede Sede) {
+    public void setSede(Sede Sede) {
         this.Sede = Sede;
     }
 
@@ -106,7 +106,7 @@ public class Membro {
     public String toString() {
         return "{" +
             " Id='" + getId() + "'" +
-            ", IdSede='" + getIdSede() + "'" +
+            ", IdSede='" + getSede().getId() + "'" +
             ", Nome='" + getNome() + "'" +
             ", Funcao='" + getFuncao() + "'" +
             ", Email='" + getEmail() + "'" +
