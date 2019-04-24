@@ -21,6 +21,7 @@ public class Sede {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long Id;
     private String Nome;
+    private String EstadoFederacao;
     private String Cidade;
     private String Bairro;
     private String Telefone;
@@ -34,8 +35,9 @@ public class Sede {
 
     }
 
-    public Sede(String Nome, String Cidade, String Bairro, String Telefone, String Url) {
+    public Sede(String Nome, String EstadoFederacao, String Cidade, String Bairro, String Telefone, String Url) {
         this.Nome = Nome;
+        this.EstadoFederacao = EstadoFederacao;
         this.Cidade = Cidade;
         this.Bairro = Bairro;
         this.Telefone = Telefone;
@@ -44,8 +46,8 @@ public class Sede {
         this.Membros = new HashSet<>();
     }
 
-    public Sede(Long Id, String Nome, String Cidade, String Bairro, String Telefone, String Url) {
-        this(Nome, Cidade, Bairro, Telefone, Url);
+    public Sede(Long Id, String EstadoFederacao, String Nome, String Cidade, String Bairro, String Telefone, String Url) {
+        this(Nome, EstadoFederacao, Cidade, Bairro, Telefone, Url);
         this.Id = Id;        
     }
 
@@ -60,6 +62,15 @@ public class Sede {
     public void setNome(String Nome) {
         this.Nome = Nome;
     }
+
+    public String getEstadoFederacao() {
+        return this.EstadoFederacao;
+    }
+
+    public void setEstadoFederacao(String EstadoFederacao) {
+        this.EstadoFederacao = EstadoFederacao;
+    }
+
 
     public String getCidade() {
         return this.Cidade;
@@ -119,18 +130,19 @@ public class Sede {
             Atividades.add(atividade);
     }
 
+
     @Override
     public String toString() {
         return "{" +
             " Id='" + getId() + "'" +
             ", Nome='" + getNome() + "'" +
+            ", EstadoFederacao='" + getEstadoFederacao() + "'" +
             ", Cidade='" + getCidade() + "'" +
             ", Bairro='" + getBairro() + "'" +
             ", Telefone='" + getTelefone() + "'" +
             ", Url='" + getUrl() + "'" +
-            ", Membros='" + getMembros() + "'" +
             ", Atividades='" + getAtividades() + "'" +
+            ", Membros='" + getMembros() + "'" +
             "}";
-    }
-
+    }     
 }

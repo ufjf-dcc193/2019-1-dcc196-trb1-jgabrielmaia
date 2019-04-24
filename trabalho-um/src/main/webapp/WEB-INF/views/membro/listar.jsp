@@ -12,10 +12,10 @@
                 <h2>${membro.getNome()}</h2>    
                 <ul>
                     <li><strong>Sede:</strong> ${membro.getSede().getNome()}</li>
-                    <li><strong>Descrição:</strong> ${membro.getFuncao()}</li>
-                    <li><strong>Início da atividade:</strong> ${membro.getEmail()}</li>
-                    <li><strong>Fim da atividade:</strong> ${membro.getDataEntrada()}</li>
-                    <li><strong>Horas Assistenciais:</strong> ${membro.getDataSaida()}</li>
+                    <li><strong>Função:</strong> ${membro.getFuncao()}</li>
+                    <li><strong>E-mail:</strong> ${membro.getEmail()}</li>
+                    <li><strong>Data de entrada:</strong> ${membro.getDataEntrada()}</li>
+                    <li><strong>Data de saída:</strong> ${membro.getDataSaida()}</li>
                 </ul> 
             </c:forEach>        	   
     </body>

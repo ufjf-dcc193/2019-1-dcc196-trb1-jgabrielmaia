@@ -18,7 +18,7 @@ public class MainApplication {
 		MembroRepository membroRepo = ctx.getBean(MembroRepository.class);		
 		SedeRepository sedeRepo = ctx.getBean(SedeRepository.class);
 		
-		Sede s = new Sede("Sede1", "Cidade1", "Bairro1", "Telefone1", "Url");
+		Sede s = new Sede("Sede1", "Estado1", "Cidade1", "Bairro1", "Telefone1", "Url");
 		sedeRepo.save(s);
 
 		Date date = new Date();
