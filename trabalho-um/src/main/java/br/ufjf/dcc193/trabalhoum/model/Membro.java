@@ -2,13 +2,11 @@ package br.ufjf.dcc193.trabalhoum.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 
@@ -18,11 +16,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Membro {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long Id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "SedeMembroId", referencedColumnName="Id", insertable = false, updatable = false)
-    private Sede IdSede;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false) 
+    private Sede Sede;
     private String Nome;
     private String Funcao;
     @Email
@@ -36,8 +33,7 @@ public class Membro {
 
     }
 
-    public Membro(Sede IdSede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
-        this.IdSede = IdSede;
+    public Membro(String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
         this.Nome = Nome;
         this.Funcao = Funcao;
         this.Email = Email;
@@ -45,6 +41,10 @@ public class Membro {
         this.DataSaida = DataSaida;
     }
 
+    public Membro(Sede Sede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
+        this(Nome, Funcao, Email, DataEntrada, DataSaida);
+        this.Sede = Sede;
+    }
 
     public Long getId() {
         return this.Id;
@@ -55,11 +55,11 @@ public class Membro {
     }
 
     public Sede getIdSede() {
-        return this.IdSede;
+        return this.Sede;
     }
 
-    public void setIdSede(Sede IdSede) {
-        this.IdSede = IdSede;
+    public void setIdSede(Sede Sede) {
+        this.Sede = Sede;
     }
 
     public String getNome() {

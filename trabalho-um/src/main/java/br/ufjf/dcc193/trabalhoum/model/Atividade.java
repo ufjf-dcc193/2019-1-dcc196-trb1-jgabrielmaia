@@ -2,13 +2,11 @@ package br.ufjf.dcc193.trabalhoum.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,11 +15,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Atividade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long Id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "SedeAtividadeId", referencedColumnName="Id",  insertable = false, updatable = false)
-    private Sede IdSede;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    private Sede Sede;
     private String Titulo;
     private String Descricao;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -37,8 +34,12 @@ public class Atividade {
 
     }
 
-    public Atividade(Sede IdSede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
-        this.IdSede = IdSede;
+    public Atividade(Sede Sede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
+        this(Titulo, Descricao, DataInicio, DataFim, HorasAssistenciais, HorasJuridicas, HorasFinanceiras, HorasAdministrativas);
+        this.Sede = Sede;
+    }
+
+    public Atividade(String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
         this.Titulo = Titulo;
         this.Descricao = Descricao;
         this.DataInicio = DataInicio;
@@ -59,11 +60,11 @@ public class Atividade {
     }
 
     public Sede getIdSede() {
-        return this.IdSede;
+        return this.Sede;
     }
 
     public void setIdSede(Sede IdSede) {
-        this.IdSede = IdSede;
+        this.Sede = IdSede;
     }
 
     public String getTitulo() {

@@ -16,24 +16,26 @@ public class MainApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(MainApplication.class, args);
-
-		Date date = new Date();
-
 		AtividadeRepository ativRepo = ctx.getBean(AtividadeRepository.class);		
 		MembroRepository membroRepo = ctx.getBean(MembroRepository.class);		
 		SedeRepository sedeRepo = ctx.getBean(SedeRepository.class);
 		
-		Sede sedeObj = new Sede("Sede1", "Cidade1", "Bairro1", "Telefone1", "Url");
-		sedeRepo.deleteAll();
-		sedeRepo.save(sedeObj);
-		ativRepo.save(new Atividade(sedeObj, "Atividade1", "Descricao1", date, date, 0, 0, 0, 0));
-		membroRepo.save(new Membro(sedeObj, "Nome1", "Funcao1", "email@email.com", date, date));
+		Sede s = new Sede("Sede1", "Cidade1", "Bairro1", "Telefone1", "Url");
+		sedeRepo.save(s);
 
-		System.out.println(ativRepo.findAll().toString());
-		System.out.println();	
-		System.out.println(membroRepo.findAll().toString());		
-		System.out.println();			
-		System.out.println(sedeRepo.findAll().toString());
+		Date date = new Date();
+		Atividade a = new Atividade(s, "Atividade1", "Descricao1", date, date, 0, 0, 0, 0);
+		Membro m = new Membro(s, "Nome1", "Funcao1", "email@email.com", date, date);
+
+		ativRepo.save(a);
+		membroRepo.save(m);
+
+		s.addAtividade(a);
+		s.addMembro(m);
+
+		sedeRepo.save(s);		
+
+		ctx.close();
 	}
 
 }

@@ -7,24 +7,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "sede")
 public class Sede {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long Id;
     private String Nome;
     private String Cidade;
     private String Bairro;
     private String Telefone;
-    private String Url;    
-    @OneToMany(mappedBy = "IdSede", cascade = CascadeType.PERSIST, targetEntity = Membro.class, fetch = FetchType.EAGER)
+    private String Url;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Atividade> Atividades;    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Membro> Membros;
-    @OneToMany(mappedBy = "IdSede", cascade = CascadeType.PERSIST, targetEntity = Atividade.class, fetch = FetchType.EAGER)
-    private Set<Atividade> Atividades;
 
     public Sede(){
 
@@ -36,15 +40,17 @@ public class Sede {
         this.Bairro = Bairro;
         this.Telefone = Telefone;
         this.Url = Url;
+        this.Atividades = new HashSet<>();
+        this.Membros = new HashSet<>();
     }
 
+    public Sede(Long Id, String Nome, String Cidade, String Bairro, String Telefone, String Url) {
+        this(Nome, Cidade, Bairro, Telefone, Url);
+        this.Id = Id;        
+    }
 
     public Long getId() {
         return this.Id;
-    }
-
-    public void setId(Long Id) {
-        this.Id = Id;
     }
 
     public String getNome() {
@@ -95,12 +101,22 @@ public class Sede {
         this.Membros = Membros;
     }
 
-    public Set<Atividade> getAtividades() {
+    public void addMembro(Membro membro){
+        if(!Membros.contains(membro))
+            Membros.add(membro);
+    }
+
+    public Collection<Atividade> getAtividades() {
         return this.Atividades;
     }
 
     public void setAtividades(Set<Atividade> Atividades) {
         this.Atividades = Atividades;
+    }
+
+    public void addAtividade(Atividade atividade){
+        if(!Atividades.contains(atividade))
+            Atividades.add(atividade);
     }
 
     @Override
