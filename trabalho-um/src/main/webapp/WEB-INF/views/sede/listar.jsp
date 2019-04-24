@@ -17,6 +17,12 @@
                     <li><strong>Telefone:</strong> ${sede.getTelefone()}</li>
                     <li><a href="${sede.getUrl()}" target="_blank">Pagina da sede</a></li>
                 </ul> 
+                <form action="/sede/editar/${sede.getId()}">            
+                    <button type="submit">Editar</button>
+                </form>
+                <form action="/sede/excluir/${sede.getId()}">            
+                    <button type="submit">Excluir</button>
+                </form>
             </c:forEach>        	   
     </body>
 </html>
