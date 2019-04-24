@@ -6,9 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import br.ufjf.dcc193.trabalhoum.data.AtividadeRepository;
-import br.ufjf.dcc193.trabalhoum.data.MembroRepository;
-import br.ufjf.dcc193.trabalhoum.data.SedeRepository;
+import br.ufjf.dcc193.trabalhoum.data.*;
 import br.ufjf.dcc193.trabalhoum.model.*;
 
 @SpringBootApplication
@@ -34,8 +32,6 @@ public class MainApplication {
 		s.addMembro(m);
 
 		sedeRepo.save(s);		
-
-		ctx.close();
 	}
 
 }

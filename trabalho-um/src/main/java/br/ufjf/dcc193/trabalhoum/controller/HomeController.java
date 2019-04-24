@@ -1,4 +1,4 @@
-package br.ufjf.dcc193.trabalhoum;
+package br.ufjf.dcc193.trabalhoum.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
