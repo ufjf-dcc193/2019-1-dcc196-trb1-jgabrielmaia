@@ -20,6 +20,9 @@
                     <li><strong>Horas Financeiras:</strong> ${atividade.getHorasFinanceiras()}</li>
                     <li><strong>Horas Administrativas:</strong> ${atividade.getHorasAdministrativas()}</li>
                 </ul> 
+                <form action="/atividade/excluir/${atividade.getId()}">            
+                    <button type="submit">Excluir</button>
+                </form>
             </c:forEach>        	   
     </body>
 </html>

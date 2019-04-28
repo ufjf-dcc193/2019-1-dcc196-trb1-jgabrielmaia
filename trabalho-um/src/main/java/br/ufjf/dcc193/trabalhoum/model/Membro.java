@@ -8,11 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "membro")
 public class Membro {
     
     @Id
@@ -33,17 +35,18 @@ public class Membro {
 
     }
 
-    public Membro(String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
+    public Membro(Sede Sede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
         this.Nome = Nome;
         this.Funcao = Funcao;
         this.Email = Email;
         this.DataEntrada = DataEntrada;
         this.DataSaida = DataSaida;
+        this.Sede = Sede;
     }
 
-    public Membro(Sede Sede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
-        this(Nome, Funcao, Email, DataEntrada, DataSaida);
-        this.Sede = Sede;
+    public Membro(Long Id, Sede Sede, String Nome, String Funcao, String Email, Date DataEntrada, Date DataSaida) {
+        this(Sede, Nome, Funcao, Email, DataEntrada, DataSaida);
+        this.Id = Id;
     }
 
     public Long getId() {

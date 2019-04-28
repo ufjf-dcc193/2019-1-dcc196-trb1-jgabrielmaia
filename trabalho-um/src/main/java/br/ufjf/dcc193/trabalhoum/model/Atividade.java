@@ -8,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "atividade")
 public class Atividade {
 
     @Id
@@ -34,12 +36,14 @@ public class Atividade {
 
     }
 
-    public Atividade(Sede Sede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
-        this(Titulo, Descricao, DataInicio, DataFim, HorasAssistenciais, HorasJuridicas, HorasFinanceiras, HorasAdministrativas);
-        this.Sede = Sede;
+    public Atividade(Long Id, Sede Sede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
+        this(Sede, Titulo, Descricao, DataInicio, DataFim, HorasAssistenciais, HorasJuridicas, HorasFinanceiras, HorasAdministrativas);
+        this.Id = Id;   
+
     }
 
-    public Atividade(String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
+    public Atividade(Sede Sede, String Titulo, String Descricao, Date DataInicio, Date DataFim, Integer HorasAssistenciais, Integer HorasJuridicas, Integer HorasFinanceiras, Integer HorasAdministrativas) {
+        this.Sede = Sede;
         this.Titulo = Titulo;
         this.Descricao = Descricao;
         this.DataInicio = DataInicio;

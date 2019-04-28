@@ -15,6 +15,7 @@ import br.ufjf.dcc193.trabalhoum.model.Sede;
 
 @Controller
 public class SedeController {
+    
     @Autowired
     SedeRepository repo;
 
