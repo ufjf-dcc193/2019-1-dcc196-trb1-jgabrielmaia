@@ -39,7 +39,6 @@ public class SedeController {
         return "/sede/editar";
     }
     
-    
     @RequestMapping("/sede/atualizar")
     public RedirectView atualizar(Sede sede) {
 
@@ -49,8 +48,8 @@ public class SedeController {
     }
 
     @RequestMapping("/sede/excluir/{id}")
-    public RedirectView excluir(@PathVariable String id) {
-        repo.deleteById(Long.parseLong(id));
+    public RedirectView excluir(@PathVariable Long id) {
+        repo.deleteById(id);
 
         return new RedirectView("/sede/listar");
     }
