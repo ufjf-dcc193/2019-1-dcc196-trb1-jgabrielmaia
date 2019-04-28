@@ -16,6 +16,16 @@
             "request": "launch",
             "mainClass": "br.ufjf.dcc193.trabalhoum.DemoApplication",
             "projectName": "trabalho-um"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MainApplication<trabalho-um>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "br.ufjf.dcc193.trabalhoum.MainApplication",
+            "projectName": "trabalho-um",
+            "args": ""
         }
     ]
 }
