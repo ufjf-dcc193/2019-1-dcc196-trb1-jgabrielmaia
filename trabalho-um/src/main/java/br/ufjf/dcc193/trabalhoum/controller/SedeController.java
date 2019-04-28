@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -25,17 +24,7 @@ public class SedeController {
     }
 
     @RequestMapping("/sede/salvar")
-    public RedirectView salvar(@RequestParam String Nome, @RequestParam String EstadoFederacao,
-            @RequestParam String Cidade, @RequestParam String Bairro, @RequestParam String Telefone,
-            @RequestParam String Url) {
-
-        Sede sede = new Sede();
-        sede.setBairro(Bairro);
-        sede.setCidade(Cidade);
-        sede.setEstadoFederacao(EstadoFederacao);
-        sede.setNome(Nome);
-        sede.setTelefone(Telefone);
-        sede.setUrl(Url);
+    public RedirectView salvar(Sede sede) {
 
         repo.save(sede);
 
@@ -43,34 +32,17 @@ public class SedeController {
     }
 
     @RequestMapping("/sede/editar/{id}")
-    public String editar(@PathVariable String id, Model modelSede) {
-        Sede sede = repo.findById(Long.parseLong(id)).orElse(null);
-        
+    public String editar(@PathVariable Long id, Model modelSede) {
+        Sede sede = repo.findById(id).orElse(null);
+
         modelSede.addAttribute("sede", sede);
         return "/sede/editar";
     }
     
+    
     @RequestMapping("/sede/atualizar")
-    public RedirectView atualizar(
-            @RequestParam String Id, 
-            @RequestParam String Nome, 
-            @RequestParam String EstadoFederacao,
-            @RequestParam String Cidade,
-            @RequestParam String Bairro, 
-            @RequestParam String Telefone,
-            @RequestParam String Url) {
-        
-        Sede sede = repo.findById(Long.parseLong(Id)).orElse(null);
+    public RedirectView atualizar(Sede sede) {
 
-        if (sede == null)
-            return new RedirectView("/error");
-
-        sede.setBairro(Bairro);
-        sede.setCidade(Cidade);
-        sede.setEstadoFederacao(EstadoFederacao);
-        sede.setNome(Nome);
-        sede.setTelefone(Telefone);
-        sede.setUrl(Url);
         repo.save(sede);
 
         return new RedirectView("/sede/listar");
